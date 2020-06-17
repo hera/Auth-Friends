@@ -22,9 +22,9 @@ export default function FriendList (props) {
     return (
         <>
             {
-                friends && friends.map(friend => {
+                friends && friends.map((friend, index) => {
                     return (
-                        <Row>
+                        <Row key={index}>
                             <Col>
                                 <h4>{ friend.name }</h4>
                                 <Link to={`/friends/${friend.id}`}>Details</Link>
