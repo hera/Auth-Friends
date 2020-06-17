@@ -26,6 +26,7 @@ export default function Header (props) {
                         ? (
                             <>
                                 <Link to="/friends">Friends</Link>
+                                <Link to="/new">New</Link>
                                 <a href="/#" onClick={handleLogOut}>Log Out</a>
                             </>
                         )

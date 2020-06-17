@@ -7,6 +7,7 @@ import './App.scss';
 import PrivateRoute from './utils/privateRoute';
 import FriendList from './components/FriendList/FriendList';
 import Friend from './components/Friend/Friend';
+import NewFriend from './components/NewFriend/NewFriend';
 
 function App() {
     const token = localStorage.getItem('loginToken');
@@ -28,6 +29,8 @@ function App() {
                 <PrivateRoute exact path="/friends" component={FriendList} />
 
                 <PrivateRoute path="/friends/:id" component={Friend} />
+
+                <PrivateRoute path="/new" component={NewFriend} />
             </Switch>
         </Container>
     );
