@@ -34,6 +34,19 @@ export default function NewFriend (props) {
         });
     }
 
+    function handleSubmit (event) {
+        event.preventDefault();
+
+        authAxios().post('/api/friends', friendData)
+            .then(response => {
+                setFriendData(initialFriendData);
+                push('/friends');
+            })
+            .catch(error => {
+                setError('Please enter correct user info');
+            })
+    }
+
     return (
         <Row>
             <Col lg="6">
@@ -41,7 +54,7 @@ export default function NewFriend (props) {
                 { error &&
                     <UncontrolledAlert color="danger">{error}</UncontrolledAlert>
                 }
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <FormGroup>
                         <Label for="name">Name:</Label>
                         <Input type="text" name="name" id="name" value={friendData.name} onChange={handleInput} />
