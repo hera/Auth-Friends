@@ -1,14 +1,17 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Header.scss';
 
-export default function Header () {
-    function isLoggedIn () {
-        if (localStorage.getItem('loginToken')) {
-            return true;
-        }
-        return false;
+export default function Header (props) {
+    const { loggedIn, setLoggedIn } = props;
+    const { push } = useHistory();
+
+    function handleLogOut (event) {
+        event.preventDefault();
+        localStorage.removeItem('loginToken');
+        setLoggedIn(false);
+        push('/');
     }
 
     return (
@@ -18,10 +21,9 @@ export default function Header () {
             </Col>
             <Col>
                 <nav>
-                    <Link to="/">Home</Link>
                     {
-                        isLoggedIn()
-                        ? <Link to="/logout">Log Out</Link>
+                        loggedIn
+                        ? <a href="/#" onClick={handleLogOut}>Log Out</a>
                         : <Link to="/login">Log In</Link>
                     }
                 </nav>
