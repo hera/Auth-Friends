@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import authAxios from '../../utils/authAxios';
 import {
     Alert,
@@ -9,10 +9,24 @@ import {
 
 export default function Friend (props) {
     const { id } = useParams();
+    const { push } = useHistory();
 
     const [ friend, setFriend ] = useState();
 
     const [ error, setError ] = useState('');
+
+    function handleDeleteFriend (event) {
+        event.preventDefault();
+
+        authAxios().delete(`/api/friends/${friend.id}`)
+            .then(response => {
+                push('/friends');
+            })
+            .catch(error => {
+                setError('Error. Could not delete user.');
+            })
+
+    }
 
     useEffect(() => {
         authAxios().get(`/api/friends/${id}`)
@@ -47,10 +61,12 @@ export default function Friend (props) {
                             <a href={`mailto:${friend.email}`}>
                                 { friend.email }
                             </a>
-                            {' '}
                         </p>
                         <p>
-                        <Link to={`/friends/edit/${friend.id}`}>Edit</Link>
+                            <Link to={`/friends/edit/${friend.id}`}>Edit</Link>
+                        </p>
+                        <p>
+                            <a href="/#" onClick={handleDeleteFriend} className="text-danger">Delete</a>
                         </p>
                     </Col>
                 </Row>
