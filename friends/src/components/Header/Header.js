@@ -23,7 +23,12 @@ export default function Header (props) {
                 <nav>
                     {
                         loggedIn
-                        ? <a href="/#" onClick={handleLogOut}>Log Out</a>
+                        ? (
+                            <>
+                                <Link to="/friends">Friends</Link>
+                                <a href="/#" onClick={handleLogOut}>Log Out</a>
+                            </>
+                        )
                         : <Link to="/login">Log In</Link>
                     }
                 </nav>
