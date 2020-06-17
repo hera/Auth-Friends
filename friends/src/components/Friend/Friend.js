@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import authAxios from '../../utils/authAxios';
 import {
     Alert,
@@ -47,6 +47,10 @@ export default function Friend (props) {
                             <a href={`mailto:${friend.email}`}>
                                 { friend.email }
                             </a>
+                            {' '}
+                        </p>
+                        <p>
+                        <Link to={`/friends/edit/${friend.id}`}>Edit</Link>
                         </p>
                     </Col>
                 </Row>

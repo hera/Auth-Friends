@@ -27,7 +27,8 @@ export default function FriendList (props) {
                         <Row key={index}>
                             <Col>
                                 <h4>{ friend.name }</h4>
-                                <Link to={`/friends/${friend.id}`}>Details</Link>
+                                <Link to={`/friends/${friend.id}`}>Details</Link>{' '}
+                                <Link to={`/friends/edit/${friend.id}`}>Edit</Link>
                                 <hr />
                             </Col>
                         </Row>
